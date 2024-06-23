@@ -1,9 +1,4 @@
-// * As a user, I want to play Rock, Paper, Scissors against an automated opponent.
-// * As a user, I can enter R, P, or S to signify my choice of rock, paper, or scissors.
-// * As a user, I expect the computer to choose R, P, or S in return.
-// * As a user, I want to be prompted when I enter an invalid choice.
-// * As a user, I want the option to play again whether I win or lose.
-// * As a user, I want to see my total wins, ties, and losses after I have finished playing.
+
 // * As a user, I want to see how many times I chose each option after I have finished playing.
 
 const errorText = `The input in valid. Please type in either "R", "P", or "S".`;
@@ -13,10 +8,10 @@ const playagainText = `Do you want to play again?`
 const validChoice = ['R','P','S','ROCK','PAPER','SCISSOR'];
 const options = ['R','P','S']
 let userChoice, gameChoice;
-let numberTie = 0, numberWin = 0, numberLose = 0;
+let gameRounds = 1, numberTie = 0, numberWin = 0, numberLose = 0;
+let rChose = 0, pChose = 0, sChose = 0;
 
-// window.confirm(playagainText)
-
+//Make sure input is valid
 function validInput(){
     userChoice = window.prompt(gameMsg).toUpperCase();
     if (!validChoice.includes(userChoice)){
@@ -25,6 +20,7 @@ function validInput(){
     }
 }
 
+//change input to one letter
 function choiceOne(choiceString){
     switch(choiceString){
         case 'ROCK':
@@ -38,16 +34,35 @@ function choiceOne(choiceString){
     }
 }
 
+//Count the user's choice
+function countChoice(index){
+    switch(index){
+        case 'R':
+            return rChose ++
+        case 'P':
+            return pChose ++   
+        case 'S':
+            return sChose ++
+    }
+}
+
+//Play again function
 function playAgain(){
-    
+    return window.confirm(playagainText)
 }
 
 function gameStart(){
+    //Display game rounds
+    console.log(`Game Round: ${gameRounds}`)
+    gameRounds ++;
+
+    //get user's input and game's input
     validInput();
     gameChoice = validChoice[Math.floor(Math.random()*validChoice.length)]
-    
     gameChoice = choiceOne(gameChoice)
     userChoice = choiceOne(userChoice)
+
+    console.log(`Your choice: ${userChoice} \ngame choice: ${gameChoice}`)
 
     if (userChoice === gameChoice) {
         console.log(`tie`);
@@ -72,8 +87,20 @@ function gameStart(){
         console.log(`you lose`)
         numberLose ++
     }
-    console.log(`Number of Wins: ${numberWin} \nNumber of Lose: ${numberLose} \nNumber of Tie: ${numberTie}`)
-}
 
+    //Display number of Win, Lose, and Tie
+    console.log(`Number of Wins: ${numberWin} \nNumber of Lose: ${numberLose} \nNumber of Tie: ${numberTie}`)
+
+    //Display number of ROCK, PAPER, SCISSOR user choice
+    countChoice(userChoice)
+    console.log(`User's choice:\nNumber of Rock: ${rChose}\nNumber of Paper: ${pChose}\nNumber of Scissor: ${sChose}`)
+
+    console.log(`-------------------------------------------------------------`)
+
+    //Play Again
+    if(playAgain()){
+        gameStart()
+    }
+}
 
 gameStart();

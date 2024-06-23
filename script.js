@@ -1,12 +1,9 @@
-
-// * As a user, I want to see how many times I chose each option after I have finished playing.
-
 const errorText = `The input in valid. Please type in either "R", "P", or "S".`;
 const gameMsg = `Rock(r), Paper(p), OR Scissor(s). Chose your choice wisely XD`;
 const playagainText = `Do you want to play again?`
 
 const validChoice = ['R','P','S','ROCK','PAPER','SCISSOR'];
-const options = ['R','P','S']
+
 let userChoice, gameChoice;
 let gameRounds = 1, numberTie = 0, numberWin = 0, numberLose = 0;
 let rChose = 0, pChose = 0, sChose = 0;
